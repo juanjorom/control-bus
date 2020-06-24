@@ -1,28 +1,51 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+      absolute
+    >
+    <v-app-bar-nav-icon v-if="logeado" @click="mostrar=true"></v-app-bar-nav-icon>
+      <v-toolbar-title>{{mensaje}}</v-toolbar-title>
+      <template v-slot:extension v-if="logeado">
+        <v-tabs align-with-title >
+          <v-tab to="real">Vista</v-tab>
+          <v-tab to="detail">Recorridos</v-tab>
+          <v-tab>Configuracion</v-tab>
+        </v-tabs>
+      </template>
+    </v-app-bar>
+    <v-navigation-drawer v-model="mostrar" absolute temporary>
+      <v-list>
+        <arbolitem :arbol="arbol" @select="showData"></arbolitem>
+      </v-list>
+    </v-navigation-drawer>
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import arbolitem from '@/components/arbolItem'
 
+import { mapGetters } from 'vuex';
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data: () => ({
+    mostrar: false
+  }),
+  computed:{
+    ...mapGetters('logdata',{
+      mensaje:'getMensaje',
+      logeado:'getSucess',
+      arbol:'getArbol'
+    })
+  },
+  components:{
+    arbolitem
   }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+};
+</script>
