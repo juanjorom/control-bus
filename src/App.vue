@@ -11,7 +11,9 @@
       <template v-slot:extension v-if="logeado">
         <v-tabs align-with-title >
           <v-tab to="real">Vista</v-tab>
+          <v-tab to="historial">Historial</v-tab>
           <v-tab to="detail">Recorridos</v-tab>
+          <v-tab to="mapa">Mapa</v-tab>
           <v-tab>Configuracion</v-tab>
         </v-tabs>
       </template>

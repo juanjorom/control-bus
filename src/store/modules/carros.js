@@ -29,6 +29,9 @@ const getters = {
 }
 
 const mutations = {
+    updateCarsSelected(state, car){
+        state.carsSelected = car
+    },
     addCar(state, car){
         state.carsSelected.push(car)
         state.carsSelected.sort()

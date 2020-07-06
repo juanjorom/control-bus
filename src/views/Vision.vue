@@ -10,17 +10,16 @@
 
 <script>
 import sinoptico from '@/components/sinoptico'
-import {mapGetters} from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 export default {
     computed: {
         ...mapGetters({
             cuadros: 'carros/getAllArboles',
-            paradas: 'sock/getRuta'
+            paradas: 'sock/getRuta',
+        }),
+        ...mapState({
+            carros: state => state.carros.carsSelected
         })
-    },
-    created(){
-        console.log(this.cuadros)
-
     },
     components: {
         sinoptico

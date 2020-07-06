@@ -1,7 +1,4 @@
 import axios from 'axios'
-//import servers from '../../assets/docs/servers'
-//import idb from '@/api/idb'
-//import jdb from '@/api/jsondb'
 
 const state = {
     key: null,
@@ -36,31 +33,14 @@ const getters = {
         return state.sucess
     },
     getUsersList(){
-        /*let us = await idb.getUsers()
-        console.log(us)
-        return us.map(el => {return el.user})*/
         return []
     },
     getMensaje: state =>{
         return state.mensaje
     },
     getHostList(){
-        /*var aux = Object.keys(servers)
-        var result = []
-        aux.forEach(ele => {
-            result.push(servers[ele])
-        })
-        return result*/
         return []
     },
-    /*getCarsRuta: state => unidad =>{
-        if(state.carsRuta.hasOwnProperty(unidad)){
-            return state.carsRuta[unidad]
-        }else{
-            datos.unidades[unidad]= "SIN RUTA"
-            return state.carsRuta[unidad]
-        }
-    }*/
 }
 
 const mutations = {
@@ -73,17 +53,6 @@ const mutations = {
         state.user=ojet.user
     },
     setHost(state, host){
-        /*var aux = Object.keys(servers)
-        var exist = false
-        for (const key in aux) {
-            if(servers[key]==host){
-                exist=true
-                break
-            }
-        }
-        if(!exist){
-
-        }*/
         state.host=host
     },
     setMensaje(state, mensaje){
@@ -115,9 +84,6 @@ const actions = {
             rootState.carros.carros = cars.data.data
             rootState.carros.arboles = grupos.data.data
             if(grupos!=undefined & cars!=undefined){
-                console.log("ninguno es null");
-                console.log(rootState.carros.carros);
-                console.log(rootState.carros.arboles)
                 commit('setArbol', await dispatch('obtenerArbol',{
                      raiz:grupos.data.data[0].groupid, 
                      grup: grupos.data.data, 
@@ -125,8 +91,8 @@ const actions = {
                 commit('setSucess', true)
                 
             }
+            dispatch('sock/conectarSocket', state.host, {root:true})
         }
-        dispatch('sock/conectarSocket', state.host, {root:true})
         commit('setSending', false)
         
     },
@@ -170,9 +136,7 @@ const actions = {
 
     async pedirDatos({state},arbol){
         try {
-            const response = await axios.get('http://'+state.host+':12056/api/v1/basic/'+arbol+'?key='+state.key, {
-                
-            })
+            const response = await axios.get('http://'+state.host+':12056/api/v1/basic/'+arbol+'?key='+state.key)
             return response
         } catch (error) {
             alert(error)
@@ -182,9 +146,13 @@ const actions = {
         var exito
         try {
             const response =await axios.get('http://'+form.server+':12056/api/v1/basic/key?username='+form.user+'&password='+form.password)
-            
-            commit('setKey', response.data.data.key)
-            exito= true
+            console.log(response);
+            if(response.data.data.key!=""){
+                commit('setKey', response.data.data.key)
+                exito= true
+            }else{
+                exito = false
+            }
         } catch (error) {
             exito = false
         }

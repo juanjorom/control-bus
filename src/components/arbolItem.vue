@@ -17,18 +17,23 @@
 
 <script>
 
-import { mapState } from 'vuex'
 export default {    
     name: 'arbolitem',
     props: {
         clase: String,
         arbol: Object,
         clear: Boolean,
+
     },
     computed:{
-        ...mapState({
-            carros: state => state.carros.carsSelected
-        })
+        carros:{
+            get(){
+                return this.$store.state.carros.carsSelected
+            },
+            set(value){
+                this.$store.commit('carros/updateCarsSelected', value)
+            }
+        }
     },
     data: () => ({
         clicked: false,
@@ -41,7 +46,7 @@ export default {
     methods: {
         getCarros(carros){
             this.childCars=carros
-        }
+        },
     }
 }
 </script>

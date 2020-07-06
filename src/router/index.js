@@ -4,6 +4,8 @@ import Home from '@/views/Home'
 import Login from '@/views/Login'
 import Vision from "@/views/Vision"
 import Detail from "@/views/Detail"
+import Historial from "@/views/Historial"
+import Mapa from "@/views/Mapa"
 
 
 Vue.use(Router)
@@ -27,6 +29,16 @@ const routes= [
         path: "/detail",
         name: "detail",
         component: Detail
+    },
+    {
+        path: "/historial",
+        name: "historial",
+        component: Historial
+    },
+    {
+        path: "/mapa",
+        name: "mapa",
+        component: Mapa
     },
     {
         path: '/home',

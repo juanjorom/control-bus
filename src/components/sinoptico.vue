@@ -1,23 +1,42 @@
 <template>
     <v-container>
-        <v-row justify="center">
-            <span>{{datos.groupname}}</span>
-        </v-row>
         <v-row>
-            <div class="contenedor">
-            <svg>
-                <path d="M 200 50 L 800 50 Q 950 150 800 250 L 200 250 Q 50 150 200 50" class="ruta"></path>
-                <g class="paradas">
-                    <circle v-for="par in paradas" :key="par" :cx="calcularPositionX(par)" :cy="calcularPositionY(par)" r=5 @click="detail(par)" @mouseover="mostrar(par)" @mouseout="desMostrar(par)" ref="eti"></circle>
-                </g>
-                <g class="etiquetas" >
-                    <text v-show="etiqueta" x=0 y=0 ref="vista">{{etiqueta}}</text>
-                </g>
-                <g v-for="ocupado in ocupados" :key="ocupado.deviceid">
-                    <cam :xGeneral="calcularCamionesXGeneral(ocupado.fence)" :yGeneral="calcularCamionesYGeneral(ocupado.fence)"></cam>-->
-                </g>
-            </svg>
-        </div>
+            <v-col cols="8">
+                <v-card>
+                    <v-card-title>
+                        <span>{{datos.groupname}}</span>
+                    </v-card-title>
+                    <v-card-text class="contenedor">
+                        <div>
+                            <svg class="dibujo">
+                                <path d="M 200 50 L 800 50 Q 950 150 800 250 L 200 250 Q 50 150 200 50" class="ruta"></path>
+                                <g class="paradas">
+                                    <circle v-for="par in paradas" :key="par" :cx="calcularPositionX(par)" :cy="calcularPositionY(par)" r=5 @click="detail(par)" @mouseover="mostrar(par)" @mouseout="desMostrar(par)" ref="eti"></circle>
+                                </g>
+                                <g class="etiquetas" >
+                                    <text v-show="etiqueta" x=0 y=0 ref="vista">{{etiqueta}}</text>
+                                </g>
+                                <g v-for="ocupado in ocupados" :key="ocupado.deviceid">
+                                    <text :x="calcularCamionesXGeneral(ocupado.fence)-10" :y="calcularCamionesYGeneral(ocupado.fence)-20" >{{ocupado.devicename}}</text>
+                                    <cam :xGeneral="calcularCamionesXGeneral(ocupado.fence)" :yGeneral="calcularCamionesYGeneral(ocupado.fence)"></cam>-->
+                                </g>
+                            </svg>
+                        </div>
+                    </v-card-text>
+                    <v-card-actions>
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+            <v-col cols="4">
+                <v-card>
+                    <v-card-title>
+                        <span>INFORMACION DE {{datos.groupname}}</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-data-table  :headers="heads" :items="ocupados" :item-key="devicename"></v-data-table>
+                    </v-card-text>
+                </v-card>
+            </v-col>
         </v-row>
     </v-container>
 </template>
@@ -36,18 +55,27 @@ export default {
     data(){
         return{
             puntos: [{}],
-            etiqueta: null
+            etiqueta: null,
+            verCamion: false,
+            heads:[
+                {text: 'Unidad', value: 'devicename'},
+                {text: 'Geocerca', value: 'fence'},
+                {text: 'Fecha y Hora', value: 'hora'}
+            ]
         }
     },
     computed: {
         ...mapGetters({
             cars: 'carros/getCarsbyArbol',
-            posiciones: 'sock/getGeocercasOcupadas'
+            posiciones: 'sock/getGeocercasOcupadas',
+            seleccionados: 'carros/getCarsSelected'
         }),
         ocupados(){
-            console.log(this.cars(this.datos.groupid))
+            /*var pos = this.posiciones(this.cars(this.datos.groupid))
+            console.log(pos);
+            return pos*/
             return this.posiciones(this.cars(this.datos.groupid))
-        }
+        },
     },
     methods: {
         calcularCamionesYGeneral(parada){
@@ -132,13 +160,10 @@ export default {
 
 <style>
     .contenedor{
-        display: inline-block;
         overflow-x: auto;
-        margin-left: 50px;
-        margin-right: 40px;
     }
 
-    svg {
+    .dibujo {
         width: 1000px;
         height: 300px;
     }

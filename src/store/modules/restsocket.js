@@ -21,8 +21,6 @@ const getters = {
         return state.datos
     },
     getRuta: state => ruta =>{
-        console.log(ruta);
-        
         return state.rutas.find(bus=> bus.name==ruta).paradas
     },
     getPosition: state =>{
@@ -47,9 +45,6 @@ const mutations = {
     iniciarSocket(state,host){
         state.socket= io('http://'+host+':12056')
     },
-    /*pedirEstado(state,rootstate, host){
-
-    },*/
     addInfo(state,data){
         state.info=data
     },
@@ -61,27 +56,22 @@ const mutations = {
     },
     actualizarPosition(state, pos){
         var index =state.position.findIndex(x => x.deviceid==pos.deviceno)
-        console.log(index)
         if(index<0){
             state.position.push({deviceid: pos.deviceno, fence: "ATM", hora:"0000-00-00 00:00:00"})
             index = state.position.findIndex(x => x.deviceid==pos.deviceno)
         }
         state.position[index].fence = pos.content.substring(pos.content.indexOf(':')+1,pos.content.lastIndexOf(','))
         state.position[index].hora = pos.dateTime
-        console.log(state.position)
+        //console.log(state.position)
     }
 }
 
 const actions = {
-    //"A_SOCKET_SUB_ALARM"({commit},options){  
-    //}
-
     actualizar({commit}, data){
         commit('addInfo',data)
     },
 
-    conectarSocket({commit, dispatch , rootState}, host){
-        console.log("Se ejecuto");
+    conectarSocket({commit, rootState}, host){
         
         commit('iniciarSocket', host)
         state.socket.emit('sub_alarm', {
@@ -90,8 +80,7 @@ const actions = {
             alarmType: [18]
         })
         state.socket.on('sub_alarm', (data) => {
-            console.log(data);
-            dispatch('actualizar', data)
+            commit('actualizarPosition', data)
         })
 
     }

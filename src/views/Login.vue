@@ -21,6 +21,7 @@
                             <v-card-actions>
                                 <v-btn @click="validateUser" :disabled="sending">Entrar</v-btn>
                             </v-card-actions>
+                            <v-progress-linear v-if="sending" indeterminate></v-progress-linear>
                         </v-card>
                     </v-col>
                 </v-row>
