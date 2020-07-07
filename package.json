@@ -17,10 +17,12 @@
     "axios": "^0.19.2",
     "c3": "^0.7.18",
     "core-js": "^3.6.5",
+    "leaflet": "^1.6.0",
     "socket.io-client": "^2.3.0",
     "vue": "^2.6.11",
     "vue-c3": "^1.2.11",
     "vue-router": "^3.3.4",
+    "vue2-leaflet": "^2.5.2",
     "vuelidate": "^0.7.5",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"

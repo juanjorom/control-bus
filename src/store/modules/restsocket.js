@@ -1,5 +1,6 @@
 import rutitas from '@/assets/docs/data'
 import io from 'socket.io-client'
+//import { stat } from 'fs'
 //import axios from 'axios'
 
 const state = {
@@ -7,7 +8,8 @@ const state = {
     prevdata: [],
     rutas: rutitas.rutas,
     position: [],
-    socket: null
+    socket: null,
+    ubicacion: []
 }
 
 const getters = {
@@ -38,6 +40,9 @@ const getters = {
             }
         })
         return result
+    },
+    getUbicacion: state =>{
+        return state.ubicacion
     }
 }
 
@@ -63,6 +68,37 @@ const mutations = {
         state.position[index].fence = pos.content.substring(pos.content.indexOf(':')+1,pos.content.lastIndexOf(','))
         state.position[index].hora = pos.dateTime
         //console.log(state.position)
+    },
+    actualizarUbicacion(state, pos){
+        var index =state.ubicacion.findIndex(x => x.deviceno==pos.deviceno)
+        /*var final = {
+            deviceno: pos.deviceno,
+            coord: [pos.lat,pos.lng],
+            speed: pos.speed,
+            direction: pos.direction,
+            altitud: pos.altitude,
+            dateTime: pos.dateTime,
+            carlicence: pos.carlicense,
+            groupName: pos.groupName
+        }*/
+        if(index<0){
+            state.ubicacion.push({
+                deviceno: pos.deviceno,
+                coord: [pos.lat,pos.lng],
+                speed: pos.speed,
+                direction: pos.direction,
+                altitude: pos.altitude,
+                dateTime: pos.dateTime,
+                carlicense: pos.carlicense,
+                groupName: pos.groupName})
+        }else{
+            state.ubicacion[index].coord= [pos.lat,pos.lng]
+            state.ubicacion[index].speed= pos.speed
+            state.ubicacion[index].direction= pos.direction
+            state.ubicacion[index].altitude=pos.altitude
+            state.ubicacion[index].dateTime=pos.dateTime
+        }
+        
     }
 }
 
@@ -82,7 +118,13 @@ const actions = {
         state.socket.on('sub_alarm', (data) => {
             commit('actualizarPosition', data)
         })
-
+        state.socket.emit('sub_gps',{
+            key: rootState.logdata.key,
+            didArray: rootState.carros.carros.map(x => x.deviceid)
+        })
+        state.socket.on('sub_gps', (data) => {
+            commit('actualizarUbicacion', data)
+        })
     }
 
 }

@@ -146,7 +146,6 @@ const actions = {
         var exito
         try {
             const response =await axios.get('http://'+form.server+':12056/api/v1/basic/key?username='+form.user+'&password='+form.password)
-            console.log(response);
             if(response.data.data.key!=""){
                 commit('setKey', response.data.data.key)
                 exito= true
