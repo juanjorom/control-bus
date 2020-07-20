@@ -4,6 +4,7 @@ import logdata from './modules/logdata'
 import carros from './modules/carros'
 import sock from './modules/restsocket'
 import peticiones from './modules/peticiones'
+import datos from './modules/userData'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
       logdata,
       carros,
       sock,
-      peticiones
+      peticiones,
+      datos
     }
 })

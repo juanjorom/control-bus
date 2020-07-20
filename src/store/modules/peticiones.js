@@ -1,14 +1,19 @@
 import axios from 'axios'
+
 const state = {
-    
+    historial: null,
 }
 
 const getters = {
-
+    getHistorial: state => {
+        return state.historial
+    }
 }
 
 const mutations = {
-
+    setHistorial(state, historial){
+        state.historial = historial
+    }
 }
 
 const actions = {

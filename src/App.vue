@@ -14,7 +14,8 @@
           <v-tab to="historial">Historial</v-tab>
           <v-tab to="detail">Recorridos</v-tab>
           <v-tab to="mapa">Mapa</v-tab>
-          <v-tab>Configuracion</v-tab>
+          <v-tab to="tiempos">Tiempos y Frecuencias</v-tab>
+          <v-tab to="configuracion">Configuracion</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>

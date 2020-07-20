@@ -6,6 +6,8 @@ import Vision from "@/views/Vision"
 import Detail from "@/views/Detail"
 import Historial from "@/views/Historial"
 import Mapa from "@/views/Mapa"
+import Tiempos from "@/views/Tiempos"
+import Configuracion from "@/views/Configuracion"
 
 
 Vue.use(Router)
@@ -39,6 +41,16 @@ const routes= [
         path: "/mapa",
         name: "mapa",
         component: Mapa
+    },
+    {
+        path: "/tiempos",
+        name: "tiempos",
+        component: Tiempos
+    },
+    {
+        path: "/configuracion",
+        name: "configuracion",
+        component: Configuracion
     },
     {
         path: '/home',

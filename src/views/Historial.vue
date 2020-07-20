@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
     data(){
         return {
@@ -67,7 +67,6 @@ export default {
             menuHoraIni: false,
             menuFechaFin: false,
             menuHoraFin: false,
-            valores: [],
             loading: false
         }
     },
@@ -75,10 +74,14 @@ export default {
         ...mapGetters({
             carros: 'carros/getCarsSelected',
             getArbol: 'carros/getArbolById',
-            getRuta: 'sock/getRuta'
+            getRuta: 'sock/getRuta',
+            valores: 'peticiones/getHistorial'
         })
     },
     methods: {
+        ...mapMutations({
+            setValores: 'peticiones/setHistorial'
+        }),
         ...mapActions({
             alarmDetail: 'peticiones/alarmDetail'
         }),
@@ -113,7 +116,7 @@ export default {
                 }
             });
             
-            this.valores = this.organizarRuta(respuest, this.carros)
+            this.setValores(this.organizarRuta(respuest, this.carros))
         },
 
         organizarRuta(elementos, carros){
@@ -138,8 +141,6 @@ export default {
                         var time =item.gpstime.substring(item.gpstime.indexOf(' ') +1)
                         
                         if(lug=="ATM"){
-                            obje[lug]= time
-                            paradas ++
                             if(paradas>3){
                                 vuelt = vuelt+1
                                 obje.vuelta = "Vuelta " + vuelt

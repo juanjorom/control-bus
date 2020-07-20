@@ -5,9 +5,14 @@ module.exports = {
     "vuetify"
   ],
 
+  assetsDir: "./src/assets",
+
   pluginOptions: {
     electronBuilder: {
-      customFileProtocol: './'
+      customFileProtocol: './',
+      nodeIntegration: true,
+      externals: ['fs'],
+      nodeModulesPath: ['../../node_modules', './node_modules']
     }
   }
 }

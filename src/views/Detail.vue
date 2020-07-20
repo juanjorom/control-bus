@@ -109,8 +109,6 @@ export default {
                         var time =(((item.gpstime.substring(item.gpstime.indexOf(' ')+1)).replace(':','')).replace(/(:\d{2})$/g,''))
                         
                         if(lug=="ATM"){
-                            llen[ruta.length-1]=time
-                            paradas.push(lug)
                             if(paradas.length>3){
                                 vuelt = vuelt+1
                                 tiempos.push('Vuelta '+vuelt)

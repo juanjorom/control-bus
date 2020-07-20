@@ -1,7 +1,5 @@
 import rutitas from '@/assets/docs/data'
 import io from 'socket.io-client'
-//import { stat } from 'fs'
-//import axios from 'axios'
 
 const state = {
     info: [],
@@ -9,7 +7,9 @@ const state = {
     rutas: rutitas.rutas,
     position: [],
     socket: null,
-    ubicacion: []
+    ubicacion: [],
+    lineas: rutitas.tiempos,
+    bases: rutitas.bases
 }
 
 const getters = {
@@ -19,14 +19,24 @@ const getters = {
     getPrev: state =>{
         return state.prevdata
     },
-    getDatos: state => {
-        return state.datos
-    },
     getRuta: state => ruta =>{
         return state.rutas.find(bus=> bus.name==ruta).paradas
     },
     getPosition: state =>{
         return state.position
+    },
+    getTiempos: state => linea => {
+        return state.lineas.find(com => com.name==linea)
+    },
+    getDatos: state => linea => {
+        return state.lineas.find(com => com.name==linea)
+    },
+    getParadas: state => ruta => {
+        var par =state.lineas.find(com => com.name== ruta)
+        return par.paradas.map(ele => ele.name)
+    },
+    getBases: state => base => {
+        return state.bases.find(base)
     },
     getGeocercasOcupadas: state => carros =>{
         var result= []
