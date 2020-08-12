@@ -24,10 +24,7 @@ const getters = {
     getAllParadas: state => {
         return state.paradas
     },
-    getParadas: state => ruta => {
-        var par =state.lineas.find(com => com.name== ruta)
-        return par.paradas.map(ele => ele.name)
-    },
+
 }
 
 const mutations = {
