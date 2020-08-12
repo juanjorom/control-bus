@@ -1,15 +1,33 @@
-//import Data from 'electron-store'
-//import {leer, escribir} from '../../../electr'
-//import {leer} from '../../assets/js/natives'
+import { leerLoginData } from '../../assets/js/natives'
+
 const state = {
-    //dato: leer()
+    username: leerLoginData('username')
 }
 
 const getters = {
     
-    /*getDato: state => {
-        return state.dato
-    }*/
+    getDato: state => {
+        console.log(state.username);
+        return state.username
+    },
+
+    getTiempos: state => linea => {
+        return state.lineas.find(com => com.name==linea)
+    },
+    getDatos: state => linea => {
+        return state.lineas.find(com => com.name==linea)
+    },
+    getParadas: state => ruta => {
+        var par =state.lineas.find(com => com.name== ruta)
+        return par.paradas.map(ele => ele.name)
+    },
+    getAllParadas: state => {
+        return state.paradas
+    },
+    getParadas: state => ruta => {
+        var par =state.lineas.find(com => com.name== ruta)
+        return par.paradas.map(ele => ele.name)
+    },
 }
 
 const mutations = {

@@ -1,10 +1,14 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import path from 'path'
+import low from 'lowdb'
+import FileSync from 'lowdb/adapters/FileSync'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import {
   createProtocol,
-  /* installVueDevtools */
+  //installVueDevtools 
 } from 'vue-cli-plugin-electron-builder/lib'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -67,11 +71,11 @@ app.on('ready', async () => {
     // Electron will not launch with Devtools extensions installed on Windows 10 with dark mode
     // If you are not using Windows 10 dark mode, you may uncomment these lines
     // In addition, if the linked issue is closed, you can upgrade electron and uncomment these lines
-    // try {
-    //   await installVueDevtools()
-    // } catch (e) {
-    //   console.error('Vue Devtools failed to install:', e.toString())
-    // }
+    /* try {
+       await installVueDevtools()
+     } catch (e) {
+       console.error('Vue Devtools failed to install:', e.toString())
+     }*/
 
   }
   createWindow()
@@ -91,3 +95,27 @@ if (isDevelopment) {
     })
   }
 }
+
+// Escritura y lectura desde la webpage
+const pathToFile = path.join((isDevelopment ? __static : __dirname), '../src/extra/database.json')
+  
+const adapter = new FileSync(pathToFile)
+const db = low(adapter)
+db.defaults({loginData: {}, routes: []}).write()
+
+ipcMain.on('getLoginData', function (event, arg){
+  win.webContents.send('loginValues', {valor: db.get('loginData.'+arg).value()})
+})
+ipcMain.on('setLoginData', function (event, arg){
+  if(!db.has('loginData.'+arg.key).value()){
+    db.set('loginData.'+arg.key, []).write()
+  }
+  if(db.get('loginData.'+arg.key).find(e=> e==arg.valor).value()==undefined){
+    db.get('loginData.'+arg.key).push(arg.valor).write()
+  }
+  console.log(db.get('loginData').value());
+})
+
+ipcMain.on('getRoutesData', function (event, arg){
+  win.webContents.send('routesValues')
+})

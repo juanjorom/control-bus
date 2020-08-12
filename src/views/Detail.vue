@@ -8,7 +8,17 @@
                 <v-date-picker v-model="fechaIni"></v-date-picker>
             </v-col>
             <v-col cols="9">
-                <graf v-for="elemento in info" :key="elemento" :datos="elemento" ></graf>    
+                <v-tabs v-model="tab" grow="true">
+                    <v-tab v-for="i in tabs" :key="i" :href="'#'+i">{{i}}</v-tab>
+                </v-tabs>
+                <v-tabs-items v-model="tab">
+                    <v-tab-item value="Unidad">
+                        <detailunidad></detailunidad>
+                    </v-tab-item>
+                    <v-tab-item value="Vuelta">
+                        <detailvuelta></detailvuelta>
+                    </v-tab-item>
+                </v-tabs-items>
             </v-col>
         </v-row>
     </v-container>
@@ -16,14 +26,18 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
-import graf from '@/components/graf'
+import moment from 'moment'
+import detailunidad from "@/views/DetalleUnidad"
+import detailvuelta from "@/views/DetalleVuelta"
 
 export default {
     name: 'report-recorrido',
     data: () =>{
         return {
+            tab:"Unidad",
             prevdata: [],
             fechaIni: new Date().toISOString().substr(0, 10),
+            tabs: ["Unidad", "Vuelta"]
         }
     },
     created(){
@@ -93,45 +107,54 @@ export default {
                 element.reverse()
                 var dat= {
                     device: element[0].terid,
-                    vueltas: [],
-                    times: []
+                    times: [],
+                    vueltas: []
                 }
                 var arbol= this.getArbol(dat.device)
-                var paradas = []
-                var tiempos = []
+                dat.rutaName = arbol
+                var par = 0
                 var vuelt = 0
-                var ruta =  this.getRuta(arbol)
-                var llen = Array.from(ruta)
-                llen.fill(null)
+                var bases = this.getRuta(arbol).bases
+                var ruta =  this.getRuta(arbol).paradas
+                var fech = Array.from(ruta)
+                fech.fill(null)
                 element.forEach(item => {
                     if(item.content.includes("Enter")){
-                        var lug= (item.content.substring(item.content.indexOf(':')+1,item.content.lastIndexOf(',')))
-                        var time =(((item.gpstime.substring(item.gpstime.indexOf(' ')+1)).replace(':','')).replace(/(:\d{2})$/g,''))
-                        
-                        if(lug=="ATM"){
-                            if(paradas.length>3){
-                                vuelt = vuelt+1
-                                tiempos.push('Vuelta '+vuelt)
-                                paradas.unshift('paradas')
-                                dat.vueltas.push(paradas)
-                                dat.times.push(tiempos.concat(llen))
-                                
+                        var lug = (item.content.substring(item.content.indexOf(':')+1,item.content.lastIndexOf(',')))
+                        if(bases.find(f =>f==lug) != undefined){
+                            par++
+                            if(par>3){
+                                fech[ruta.indexOf(lug)]=moment(item.gpstime).format('x')
+                                var v = {}
+                                if(lug==bases[0]){
+                                    v.vuelta= vuelt
+                                    v.direccion= "Regreso"
+                                }else{
+                                    vuelt = vuelt+1
+                                    v.vuelta= vuelt
+                                    v.direccion= "Ida"
+                                }
+                                v.tiempos = Array.from(fech)
+                                dat.times.push(v)
                             }
-                            llen.fill(null)
-                            paradas= []
-                            tiempos= []
+                            fech.fill(null)
+                            v={}
+                            par=0
                         }
-                        if(llen[ruta.indexOf(lug)]==null){
-                            llen[ruta.indexOf(lug)]=time
-                            paradas.push(lug)
+                        if(fech[ruta.indexOf(lug)]==null){
+                            fech[ruta.indexOf(lug)]=moment(item.gpstime).format('x')
+                            par++
                         }
                         
-                    }else if(item.content.includes("Exit") && item.content.includes("ATM")){
-                        paradas.push(item.content.substring(item.content.indexOf(':')+1,item.content.lastIndexOf(',')))
-                        llen[0] = (((item.gpstime.substring(item.gpstime.indexOf(' ')+1)).replace(':','')).replace(/(:\d{2})$/g,''))
+                    }else if(item.content.includes("Exit") && item.content.includes(bases[0])){
+                        fech[ruta.indexOf(bases[0])]=moment(item.gpstime).format('x')
+                        par++
+                    }else if(item.content.includes("Exit") && item.content.includes(bases[1])){
+                        fech[ruta.indexOf(bases[1])]=moment(item.gpstime).format('x')
+                        par++
                     }
                 })
-                if(dat.vueltas.length>0){
+                if(dat.times.length>0){
                     var buscado = carros.findIndex(busc=> busc.deviceid==dat.device)
                     dat.nombre= carros[buscado].carlicence
                     dat.ruta = ruta
@@ -142,8 +165,9 @@ export default {
             return conjunt
         },
     },
-    components:{
-        graf
+    components: {
+        detailunidad,
+        detailvuelta
     }
 }
 </script>

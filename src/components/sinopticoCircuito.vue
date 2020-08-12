@@ -49,9 +49,8 @@ export default {
     name: "sinoptico",
     props: {
         datos: Object,
-        paradas: Array
+        paradas: Array,
     },
-
     data(){
         return{
             puntos: [{}],
@@ -71,9 +70,6 @@ export default {
             seleccionados: 'carros/getCarsSelected'
         }),
         ocupados(){
-            /*var pos = this.posiciones(this.cars(this.datos.groupid))
-            console.log(pos);
-            return pos*/
             return this.posiciones(this.cars(this.datos.groupid))
         },
     },
@@ -101,7 +97,7 @@ export default {
         calcularPositionX(parada){
             var index = this.puntos.findIndex(el => el.nombre==parada) 
             if(index<0){
-                this.puntos.push({id:this.paradas.indexOf(parada), nombre:parada})
+                this.puntos.push({id:this.paradas.indexOf(parada), nombre: parada})
                 index = this.puntos.findIndex(el => el.nombre==parada)
             }
             var medio = this.paradas.indexOf(this.datos.groupname)

@@ -1,15 +1,7 @@
 <template>
   <v-container fluid>
       <v-col cols="12">
-          <span>{{datos.rutaName}}</span>
-          <v-row>
-              <v-col cols="6">
-                  <v-select v-model="vueltaNo" :items="datosVueltas" label="Vuelta"></v-select>
-              </v-col>
-              <v-col cols="6">
-                  <v-select v-model="direccionSel" :items="direccion" label="Sentido"></v-select>
-              </v-col>
-          </v-row>
+          <span>{{datos.nombre}}</span>
           <vuec3 :handler="handler"></vuec3>
       </v-col>
   </v-container>
@@ -27,23 +19,6 @@ export default {
         datos: Object
     },
     computed: {
-        datosVueltas(){
-            var res= this.datos.vueltas.map(v => v.vuelta);
-            return res
-        },
-        recorridos(){
-            var res = []
-            if(this.vueltaNo >= 0 & this.direccionSel !=""){
-                var vuel = this.vueltaNo
-                var direccion = this.direccionSel
-                this.datos.vueltas.forEach(function (e) {
-                        if(e.vuelta==vuel && e.direccion==direccion){
-                            res.push(Array.from(e.tiempos))
-                        }
-                    })
-            }
-            return res
-        },
         options(){
             return {
                 size: {
@@ -59,7 +34,7 @@ export default {
                             return null
                         }
                     },
-                    columns: this.recorridos,
+                    columns: this.datos.vueltas,
                     type: 'line'
                 },
                 axis: {
@@ -89,30 +64,20 @@ export default {
     },
     data() {
         return {
-            handler: new Vue(),
-            direccion: ["Ida", "Regreso"],
-            vueltaNo: Number,
-            direccionSel: "",
-            actual: []
+            handler: new Vue()
         }
     },
-    watch: {
-        vueltaNo: function() {
-            console.log(this.recorridos);
-            this.handler.$emit('dispatch', (chart) => chart.load({columns:this.recorridos}))
-        },
-        direccionSel: function() {
-            console.log(this.recorridos);
-            this.handler.$emit('dispatch', (chart) => chart.load({columns:this.recorridos}))
-        }
+    updated(){
+        console.log(this.datos.vueltas);
     },
     methods: {
         ...mapActions('sock',{
             addInfo: 'actualizar'
-        })
+        }),
     },
     mounted(){
         this.handler.$emit('init',this.options)
+        console.log(this.datos.vueltas);
     },
     components: {
         Vuec3

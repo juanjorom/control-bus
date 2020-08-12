@@ -129,7 +129,8 @@ export default {
                 }
                 var arbol= this.getArbol(dat.device)
                 var vuelt = 0
-                var ruta =  this.getRuta(arbol)
+                var bases = this.getRuta(arbol).bases
+                var ruta =  this.getRuta(arbol).paradas
                 var obje = {}
                 var paradas= 0
                 ruta.forEach(e => {
@@ -140,10 +141,16 @@ export default {
                         var lug= (item.content.substring(item.content.indexOf(':')+1,item.content.lastIndexOf(',')))
                         var time =item.gpstime.substring(item.gpstime.indexOf(' ') +1)
                         
-                        if(lug=="ATM"){
+                        if(bases.find(f => f==lug)){
                             if(paradas>3){
-                                vuelt = vuelt+1
-                                obje.vuelta = "Vuelta " + vuelt
+                                if(lug==bases[0]){
+                                    obje.direccion="Regreso"
+                                    obje.vuelta = "Vuelta " + vuelt
+                                }else{
+                                    obje.direccion="Ida"
+                                    vuelt = vuelt+1
+                                    obje.vuelta = "Vuelta " + vuelt
+                                }
                                 dat.vueltas.push(obje)
                             }
                             obje={}
@@ -154,8 +161,11 @@ export default {
                             paradas++
                         }
                         
-                    }else if(item.content.includes("Exit") && item.content.includes("ATM")){
-                        obje["ATM"] = item.gpstime.substring(item.gpstime.indexOf(' ') +1)
+                    }else if(item.content.includes("Exit") && item.content.includes(bases[0])){
+                        obje[bases[0]] = item.gpstime.substring(item.gpstime.indexOf(' ') +1)
+                        paradas++
+                    }else if(item.content.includes("Exit") && item.content.includes(bases[1])){
+                        obje[bases[1]] = item.gpstime.substring(item.gpstime.indexOf(' ') +1)
                         paradas++
                     }
                 })
