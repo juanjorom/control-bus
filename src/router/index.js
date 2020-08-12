@@ -9,7 +9,6 @@ import Mapa from "@/views/Mapa"
 import Tiempos from "@/views/Tiempos"
 import Configuracion from "@/views/Configuracion"
 
-
 Vue.use(Router)
 
 const routes= [

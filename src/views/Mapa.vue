@@ -14,7 +14,6 @@
 <script>
 import {LMap, LTileLayer, LMarker, LTooltip } from 'vue2-leaflet'
 import { mapGetters } from 'vuex';
-import 'leaflet/dist/leaflet.css'
 import L from 'leaflet';
 
 delete L.Icon.Default.prototype._getIconUrl;

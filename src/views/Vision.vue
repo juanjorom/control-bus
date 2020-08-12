@@ -2,27 +2,24 @@
     <v-container>
         <v-col cols="12" align="center">
             <div v-for="arbol in cuadros" :key="arbol.groupid" >
-                <sinoptico :datos="arbol" :paradas="paradas(arbol.groupname)"></sinoptico>
+                <invocador :datos="arbol" :ruta="paradas(arbol.groupname)"></invocador>
             </div>
         </v-col>
     </v-container>
 </template>
 
 <script>
-import sinoptico from '@/components/sinoptico'
-import {mapGetters, mapState} from 'vuex'
+import invocador from '@/components/invocador'
+import {mapGetters} from 'vuex'
 export default {
     computed: {
         ...mapGetters({
             cuadros: 'carros/getAllArboles',
             paradas: 'sock/getRuta',
-        }),
-        ...mapState({
-            carros: state => state.carros.carsSelected
         })
     },
     components: {
-        sinoptico
+        invocador
     }
 }
 </script>

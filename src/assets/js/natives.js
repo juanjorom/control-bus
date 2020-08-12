@@ -1,9 +1,15 @@
-/*const fs = require('fs');
-const path = require('path');
 
-function leer() {
-    var texto = fs.readFileSync(path.join(__dirname, 'datos.txt'), 'utf-8');
-    return texto;
+//import { ipcRenderer } from 'electron'
+function leerLoginData(arg = String) {
+    /*ipcRenderer.send('getLoginData', arg)
+    return ipcRenderer.on('loginValues', function (event, val){
+        return val
+    })*/
+    console.log(arg);
 }
 
-export { leer };*/
+function escribirLoginData(arg = String, valor){
+    //ipcRenderer.send('setLoginData', {arg: arg, valor:valor})
+    console.log(arg, valor);
+}
+export { leerLoginData, escribirLoginData };

@@ -12,7 +12,10 @@ module.exports = {
       customFileProtocol: './',
       nodeIntegration: true,
       externals: ['fs'],
-      nodeModulesPath: ['../../node_modules', './node_modules']
+      nodeModulesPath: ['../../node_modules', './node_modules'],
+      builderOptions: {
+        extraResources: ['src/extra/database.json']
+      },
     }
   }
 }

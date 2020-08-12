@@ -10,15 +10,17 @@
       <v-toolbar-title>{{mensaje}}</v-toolbar-title>
       <template v-slot:extension v-if="logeado">
         <v-tabs align-with-title >
-          <v-tab to="real">Vista</v-tab>
-          <v-tab to="historial">Historial</v-tab>
-          <v-tab to="detail">Recorridos</v-tab>
-          <v-tab to="mapa">Mapa</v-tab>
-          <v-tab to="tiempos">Tiempos y Frecuencias</v-tab>
-          <v-tab to="configuracion">Configuracion</v-tab>
+          <v-tab to="/real">Vista</v-tab>
+          <!--<v-tab to="historial">Historial</v-tab>-->
+          <v-tab to="/mapa">Mapa</v-tab>
+          <v-tab to="/tiempos">Tiempos y Frecuencias</v-tab>
+          <v-tab :to="{name:'detail'}" exact>Grafica</v-tab>
+          <v-tab to="/configuracion">Configuracion</v-tab>
         </v-tabs>
       </template>
-    </v-app-bar>
+      <v-spacer></v-spacer>
+      <v-img src="../public/img/startLogin.gif" aspect-ratio="2" max-width="100px" contain></v-img>
+    </v-app-bar> 
     <v-navigation-drawer v-model="mostrar" absolute temporary>
       <v-list>
         <arbolitem :arbol="arbol" @select="showData"></arbolitem>

@@ -9,38 +9,63 @@
     "rutas":[
         {
             "name": "LA MISION",
-            "paradas": ["ATM", "WALMART", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "LAGO REAL", "MEZCALES", "PALMA REAL", "SAN VICENTE", "LOS ANGELES", "LA MISION", "LOS ANGELES R", "SAN VICENTE R", "PALMA REAL R", "MEZCALES R", "LAGO REAL R", "VALLE DORADO R", "CRUCERO 2 R", "CRUCERO 1 R", "JARRETADERAS R", "LAS JUNTAS R", "WALMART R"]
+            "paradas": ["ATM","LAS GLORIAS", "WALMART", "LAS JUNTAS", "JARRETADERAS", "CRUCERO CEIBAS", "CRUCERO MARLIN", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN VICENTE", "LOS ANGELES", "LA MISION"],
+            "tipo": "LINEAL",
+            "bases": ["ATM","LA MISION"]
         },
         {
             "name":"SAN JUAN VALLE",
-            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN CLEMENTE", "PALMA REAL", "SAN VICENTE", "EL PROVENIR", "SAN JOSE", "GLORIETA", "SAN JUAN VALLE", "GLORIETA R", "SAN JOSE R", "EL PORVENIR R", "SAN VICENTE R", "PALMA REAL R", "SAN CLEMENTE R", "MEZCALES R", "LAGO REAL R", "VALLE DORADO R", "CRUCERO 2 R", "CRUCERO 1 R", "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"]
+            "paradas": ["ATM","LAS GLORIAS", "WALMART", "LAS JUNTAS", "JARRETADERAS", "CRUCERO CEIBAS", "CRUCERO MARLIN", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN VICENTE", "SAN JOSE", "GLORIETA ARBOLEDAS", "SAN JUAN VALLE"],
+            "tipo": "LINEAL",
+            "bases": ["ATM","SAN JUAN VALLE"]
         },
         {
             "name":"PUNTA DE MITA",
-            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN CLEMENTE", "PALMA REAL", "SAN VICENTE", "EL PROVENIR", "SAN JOSE", "GLORIETA", "PUNTA DE MITA", "GLORIETA R", "SAN JOSE R", "EL PORVENIR R", "SAN VICENTE R", "PALMA REAL R", "SAN CLEMENTE R", "MEZCALES R", "LAGO REAL R", "VALLE DORADO R", "CRUCERO 2 R", "CRUCERO 1 R", "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"]
+            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN CLEMENTE", "PALMA REAL", "SAN VICENTE", "EL PROVENIR", "SAN JOSE", "GLORIETA", "PUNTA DE MITA", "GLORIETA R", "SAN JOSE R", "EL PORVENIR R", "SAN VICENTE R", "PALMA REAL R", "SAN CLEMENTE R", "MEZCALES R", "LAGO REAL R", "VALLE DORADO R", "CRUCERO 2 R", "CRUCERO 1 R", "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"],
+            "tipo": "LINEAL"
         },
         {
             "name":"NUEVO VALLARTA",
-            "paradas":["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN CLEMENTE", "PALMA REAL", "SAN VICENTE", "EL PROVENIR", "SAN JOSE", "GLORIETA", "NUEVO VALLARTA", "GLORIETA R", "SAN JOSE R", "EL PORVENIR R", "SAN VICENTE R", "PALMA REAL R", "SAN CLEMENTE R", "MEZCALES R", "LAGO REAL R", "VALLE DORADO R", "CRUCERO 2 R", "CRUCERO 1 R",  "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"]
+            "paradas":["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN CLEMENTE", "PALMA REAL", "SAN VICENTE", "EL PROVENIR", "SAN JOSE", "GLORIETA", "NUEVO VALLARTA", "GLORIETA R", "SAN JOSE R", "EL PORVENIR R", "SAN VICENTE R", "PALMA REAL R", "SAN CLEMENTE R", "MEZCALES R", "LAGO REAL R", "VALLE DORADO R", "CRUCERO 2 R", "CRUCERO 1 R",  "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"],
+            "tipo": "CIRCUITO",
+            "bases": ["PUEBLITO PARAISO"]
         },
         {
             "name":"NUEVO VALLARTA RIU",
-            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN CLEMENTE", "PALMA REAL", "SAN VICENTE", "EL PROVENIR", "SAN JOSE", "GLORIETA", "NUEVO VALLARTA RIU", "GLORIETA R", "SAN JOSE R", "EL PORVENIR R", "SAN VICENTE R", "PALMA REAL R", "SAN CLEMENTE R", "MEZCALES R", "LAGO REAL R", "VALLE DORADO R", "CRUCERO 2 R", "CRUCERO 1 R", "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"]
+            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "LAGO REAL", "MEZCALES", "SAN CLEMENTE", "PALMA REAL", "SAN VICENTE", "EL PROVENIR", "SAN JOSE", "GLORIETA", "NUEVO VALLARTA RIU", "GLORIETA R", "SAN JOSE R", "EL PORVENIR R", "SAN VICENTE R", "PALMA REAL R", "SAN CLEMENTE R", "MEZCALES R", "LAGO REAL R", "VALLE DORADO R", "CRUCERO 2 R", "CRUCERO 1 R", "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"],
+            "tipo": "CIRCUITO"
         },
         {
             "name":"JARRETADERAS",
-            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"]
+            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"],
+            "tipo": "LINEAL"
         },
         {
             "name":"VALLE DORADO",
-            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"]
+            "paradas": ["ATM","LAS GLORIAS", "WALMART", "AEROPUERTO", "CENTRAL", "LAS JUNTAS", "JARRETADERAS", "CRUCERO 1", "CRUCERO 2", "VALLE DORADO", "JARRETADERAS R", "LAS JUNTAS R", "CENTRAL R", "AEROPUERTO R", "WALMART R", "LAS GLORIAS R"],
+            "tipo": "LINEAL"
         }
     ],
     "bases": ["ATM", "LA MISION", "VALLE DORADO", "PUNTA DE MITA", "SAN JUAN VALLE", "JARRETADERAS PUEBLO"],
+    "paradas":[
+        {"id": 1, "name": "LA MISION", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "21.621646", "lon": "-105.228743"}, {"lat": "21.621646", "lon": "-106.228743"}]},
+        {"id": 2, "name": "LOS ANGELES", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}] },
+        {"id": 3, "name": "SAN VICENTE", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 4, "name": "MEZCALES", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 5, "name": "LAGO REAL", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 6, "name": "CRUCERO MARLIN", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 7, "name": "CRUCERO CEIBAS", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 8, "name": "JARRETADERAS", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 9, "name": "LAS JUNTAS", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 10, "name": "WALMART", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 11, "name": "LAS GLORIAS", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]},
+        {"id": 12, "name": "ATM", "points":[ {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}, {"lat": "20.621646", "lon": "-105.228743"}]}
+    ],
     "tiempos": [
         {
             "name": "LA MISION",
-            "tipo": "Lineas",
+            "tipo": "LINEAL",
+            "bases": ["ATM","LA MISION"],
             "paradas": [
                 {
                     "name": "ATM",

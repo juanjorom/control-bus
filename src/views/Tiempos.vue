@@ -51,7 +51,7 @@
                     <v-card-text>
 
                         <v-row v-for="vuelta in item.vueltas" :key="vuelta">
-                            <tabla :paradas="vuelta" :direccion="vuelta.direccion" ></tabla>
+                            <tabla :paradas="vuelta" :direccion="vuelta.direccion" :vuelta="vuelta.vuelta" :ruta="item.ruta"></tabla>
                         </v-row>
                     </v-card-text>
                 </v-card>
@@ -85,6 +85,8 @@ export default {
             historial: 'peticiones/getHistorial',
             datos: 'datos/getDato',
             carros: 'carros/getCarsSelected',
+            ruta: 'sock/getRuta',
+            arbol: 'carros/getArbolById'
         })
     },
     components: {
@@ -132,11 +134,13 @@ export default {
             var conjunt = []
             elementos.forEach(element => {
                 element.reverse()
+                var arbol= this.arbol(element[0].terid)
                 var dat= {
                     device: element[0].terid,
-                    vueltas: []
+                    vueltas: [],
+                    ruta: arbol
                 }
-                //var arbol= this.getArbol(dat.device)
+                var bases = this.ruta(arbol).bases
                 var vuelt = 0
                 var obje = {}
                 var paradas= 0
@@ -154,9 +158,9 @@ export default {
                             }
                         )
                         paradas++
-                        if(lug=="ATM" || lug=="LA MISION"){
+                        if(bases.find(i => i == lug) != undefined){
                             if(paradas>3){
-                                if(lug=="ATM"){
+                                if(lug==bases[0]){
                                     obje.direccion="Regreso"
                                     obje.vuelta = "Vuelta " + vuelt
                                 }
@@ -173,20 +177,20 @@ export default {
                         }
                         
                         
-                    }else if(item.content.includes("Exit") && item.content.includes("ATM")){
+                    }else if(item.content.includes("Exit") && item.content.includes(bases[0])){
                         obje.paradas.push(
                             {
                                 time: item.gpstime.substring(item.gpstime.indexOf(' ') +1),
-                                parada: "ATM",
+                                parada: bases[0],
                                 fecha: item.gpstime
                             }
                         )
                         paradas++
-                    }else if(item.content.includes("Exit") && item.content.includes("LA MISION")){
+                    }else if(item.content.includes("Exit") && item.content.includes(bases[1])){
                         obje.paradas.push(
                             {
                                 time: item.gpstime.substring(item.gpstime.indexOf(' ') +1),
-                                parada: "LA MISION",
+                                parada: bases[1],
                                 fecha: item.gpstime
                             }
                         )
